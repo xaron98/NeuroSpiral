@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+dist/
+build/
+
+# Data (too large for git — download from PhysioNet)
+data/raw/
+data/hmc/
+*.edf
+
+# Results (regenerate with scripts)
+data/results/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
