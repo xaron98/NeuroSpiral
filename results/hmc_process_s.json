@@ -1,0 +1,38 @@
+{
+  "dataset": "HMC",
+  "n_subjects": 146,
+  "n_epochs": 117627,
+  "analysis_a": {
+    "n_subjects_with_cycles": 140,
+    "total_cycles": 925,
+    "mean_cycle_duration_min": 44.6
+  },
+  "analysis_b": {
+    "cycle_level_pearson_r": -0.37,
+    "cycle_level_pearson_p": 2.1841458097946744e-31,
+    "median_tau_delta_cycles": 1.99,
+    "median_tau_delta_hours": 1.5,
+    "n_fits_delta": 60,
+    "median_tau_omega1_cycles": 1.4,
+    "median_tau_omega1_hours": 1.0,
+    "n_fits_omega1": 61,
+    "group_tau_delta_cycles": 3.24,
+    "group_tau_omega1_cycles": 0.4
+  },
+  "analysis_c": {
+    "n_periodograms": 142,
+    "frac_sig_90min_peak": 0.0,
+    "n_sig_peaks": 0,
+    "group_dominant_period_min": 119.9,
+    "median_subject_peak_min": 101.0
+  },
+  "analysis_d": {
+    "n_subjects": 146,
+    "epoch_r_mean": -0.4266,
+    "epoch_r_std": 0.2215,
+    "epoch_r_median": -0.446,
+    "epoch_r_min": -0.8658,
+    "epoch_r_max": 0.1067,
+    "frac_negative": 0.973
+  }
+}
