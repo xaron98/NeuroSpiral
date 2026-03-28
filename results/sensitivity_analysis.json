@@ -1,0 +1,367 @@
+{
+  "d_values": [
+    2,
+    4,
+    6,
+    8
+  ],
+  "tau_values": [
+    10,
+    15,
+    20,
+    25,
+    30,
+    40,
+    50
+  ],
+  "n_subjects": 13,
+  "n_epochs": 27886,
+  "best_cmi": {
+    "d": 6,
+    "tau": 10,
+    "value": 0.088519
+  },
+  "best_fratio": {
+    "d": 4,
+    "tau": 10,
+    "value": 0.078364
+  },
+  "reference_d4_tau25": {
+    "cmi": 0.07706,
+    "mi": 0.041073,
+    "fratio": 0.072541,
+    "cmi_pct_of_best": 87.1,
+    "fratio_pct_of_best": 92.6
+  },
+  "grid": {
+    "d2_tau10": {
+      "d": 2,
+      "tau": 10,
+      "valid_epochs": 27886,
+      "valid_frac": 1.0,
+      "cmi": 0.088256,
+      "mi": 0.043981,
+      "fratio": 0.078267
+    },
+    "d2_tau15": {
+      "d": 2,
+      "tau": 15,
+      "valid_epochs": 27886,
+      "valid_frac": 1.0,
+      "cmi": 0.085816,
+      "mi": 0.043028,
+      "fratio": 0.077404
+    },
+    "d2_tau20": {
+      "d": 2,
+      "tau": 20,
+      "valid_epochs": 27886,
+      "valid_frac": 1.0,
+      "cmi": 0.080195,
+      "mi": 0.041819,
+      "fratio": 0.074186
+    },
+    "d2_tau25": {
+      "d": 2,
+      "tau": 25,
+      "valid_epochs": 27886,
+      "valid_frac": 1.0,
+      "cmi": 0.077035,
+      "mi": 0.04102,
+      "fratio": 0.072433
+    },
+    "d2_tau30": {
+      "d": 2,
+      "tau": 30,
+      "valid_epochs": 27886,
+      "valid_frac": 1.0,
+      "cmi": 0.074187,
+      "mi": 0.040551,
+      "fratio": 0.070827
+    },
+    "d2_tau40": {
+      "d": 2,
+      "tau": 40,
+      "valid_epochs": 27886,
+      "valid_frac": 1.0,
+      "cmi": 0.070736,
+      "mi": 0.039429,
+      "fratio": 0.068485
+    },
+    "d2_tau50": {
+      "d": 2,
+      "tau": 50,
+      "valid_epochs": 27886,
+      "valid_frac": 1.0,
+      "cmi": 0.069834,
+      "mi": 0.039561,
+      "fratio": 0.068224
+    },
+    "d4_tau10": {
+      "d": 4,
+      "tau": 10,
+      "valid_epochs": 27886,
+      "valid_frac": 1.0,
+      "cmi": 0.088143,
+      "mi": 0.044017,
+      "fratio": 0.078364,
+      "torus_v2_cmi": {
+        "angular_acceleration": 0.102447,
+        "geodesic_distance": 0.090038,
+        "angular_entropy": 0.087603,
+        "theta_harmonic_1": 0.014115,
+        "theta_harmonic_2": 0.016085,
+        "theta_harmonic_3": 0.015424,
+        "theta_harmonic_4": 0.017591,
+        "torus_curvature": 0.144158,
+        "angular_range": 0.04634
+      }
+    },
+    "d4_tau15": {
+      "d": 4,
+      "tau": 15,
+      "valid_epochs": 27886,
+      "valid_frac": 1.0,
+      "cmi": 0.085855,
+      "mi": 0.043191,
+      "fratio": 0.077486,
+      "torus_v2_cmi": {
+        "angular_acceleration": 0.093322,
+        "geodesic_distance": 0.0879,
+        "angular_entropy": 0.116836,
+        "theta_harmonic_1": 0.01491,
+        "theta_harmonic_2": 0.015889,
+        "theta_harmonic_3": 0.01543,
+        "theta_harmonic_4": 0.017407,
+        "torus_curvature": 0.13959,
+        "angular_range": 0.047186
+      }
+    },
+    "d4_tau20": {
+      "d": 4,
+      "tau": 20,
+      "valid_epochs": 27886,
+      "valid_frac": 1.0,
+      "cmi": 0.08068,
+      "mi": 0.041682,
+      "fratio": 0.074274,
+      "torus_v2_cmi": {
+        "angular_acceleration": 0.08829,
+        "geodesic_distance": 0.082549,
+        "angular_entropy": 0.131882,
+        "theta_harmonic_1": 0.01574,
+        "theta_harmonic_2": 0.017274,
+        "theta_harmonic_3": 0.016404,
+        "theta_harmonic_4": 0.018216,
+        "torus_curvature": 0.132621,
+        "angular_range": 0.039528
+      }
+    },
+    "d4_tau25": {
+      "d": 4,
+      "tau": 25,
+      "valid_epochs": 27886,
+      "valid_frac": 1.0,
+      "cmi": 0.07706,
+      "mi": 0.041073,
+      "fratio": 0.072541,
+      "torus_v2_cmi": {
+        "angular_acceleration": 0.084,
+        "geodesic_distance": 0.078913,
+        "angular_entropy": 0.102217,
+        "theta_harmonic_1": 0.01769,
+        "theta_harmonic_2": 0.018098,
+        "theta_harmonic_3": 0.016859,
+        "theta_harmonic_4": 0.018669,
+        "torus_curvature": 0.127377,
+        "angular_range": 0.022861
+      }
+    },
+    "d4_tau30": {
+      "d": 4,
+      "tau": 30,
+      "valid_epochs": 27886,
+      "valid_frac": 1.0,
+      "cmi": 0.074617,
+      "mi": 0.040767,
+      "fratio": 0.070892,
+      "torus_v2_cmi": {
+        "angular_acceleration": 0.07922,
+        "geodesic_distance": 0.075806,
+        "angular_entropy": 0.047473,
+        "theta_harmonic_1": 0.016113,
+        "theta_harmonic_2": 0.017073,
+        "theta_harmonic_3": 0.015996,
+        "theta_harmonic_4": 0.018314,
+        "torus_curvature": 0.123181,
+        "angular_range": 0.011134
+      }
+    },
+    "d4_tau40": {
+      "d": 4,
+      "tau": 40,
+      "valid_epochs": 27886,
+      "valid_frac": 1.0,
+      "cmi": 0.07093,
+      "mi": 0.039761,
+      "fratio": 0.068517,
+      "torus_v2_cmi": {
+        "angular_acceleration": 0.075687,
+        "geodesic_distance": 0.072438,
+        "angular_entropy": 0.026242,
+        "theta_harmonic_1": 0.014112,
+        "theta_harmonic_2": 0.011848,
+        "theta_harmonic_3": 0.012969,
+        "theta_harmonic_4": 0.014306,
+        "torus_curvature": 0.117857,
+        "angular_range": 0.008553
+      }
+    },
+    "d4_tau50": {
+      "d": 4,
+      "tau": 50,
+      "valid_epochs": 27886,
+      "valid_frac": 1.0,
+      "cmi": 0.069569,
+      "mi": 0.039441,
+      "fratio": 0.068101,
+      "torus_v2_cmi": {
+        "angular_acceleration": 0.074436,
+        "geodesic_distance": 0.071335,
+        "angular_entropy": 0.027486,
+        "theta_harmonic_1": 0.010055,
+        "theta_harmonic_2": 0.01044,
+        "theta_harmonic_3": 0.01085,
+        "theta_harmonic_4": 0.010456,
+        "torus_curvature": 0.115781,
+        "angular_range": 0.008959
+      }
+    },
+    "d6_tau10": {
+      "d": 6,
+      "tau": 10,
+      "valid_epochs": 27886,
+      "valid_frac": 1.0,
+      "cmi": 0.088519,
+      "mi": 0.04403,
+      "fratio": 0.078323
+    },
+    "d6_tau15": {
+      "d": 6,
+      "tau": 15,
+      "valid_epochs": 27886,
+      "valid_frac": 1.0,
+      "cmi": 0.085867,
+      "mi": 0.043354,
+      "fratio": 0.077483
+    },
+    "d6_tau20": {
+      "d": 6,
+      "tau": 20,
+      "valid_epochs": 27886,
+      "valid_frac": 1.0,
+      "cmi": 0.080445,
+      "mi": 0.041819,
+      "fratio": 0.074162
+    },
+    "d6_tau25": {
+      "d": 6,
+      "tau": 25,
+      "valid_epochs": 27886,
+      "valid_frac": 1.0,
+      "cmi": 0.076838,
+      "mi": 0.041238,
+      "fratio": 0.072467
+    },
+    "d6_tau30": {
+      "d": 6,
+      "tau": 30,
+      "valid_epochs": 27886,
+      "valid_frac": 1.0,
+      "cmi": 0.074367,
+      "mi": 0.040787,
+      "fratio": 0.070787
+    },
+    "d6_tau40": {
+      "d": 6,
+      "tau": 40,
+      "valid_epochs": 27886,
+      "valid_frac": 1.0,
+      "cmi": 0.070281,
+      "mi": 0.039612,
+      "fratio": 0.068263
+    },
+    "d6_tau50": {
+      "d": 6,
+      "tau": 50,
+      "valid_epochs": 27886,
+      "valid_frac": 1.0,
+      "cmi": 0.068823,
+      "mi": 0.039385,
+      "fratio": 0.067811
+    },
+    "d8_tau10": {
+      "d": 8,
+      "tau": 10,
+      "valid_epochs": 27886,
+      "valid_frac": 1.0,
+      "cmi": 0.088217,
+      "mi": 0.044113,
+      "fratio": 0.078344
+    },
+    "d8_tau15": {
+      "d": 8,
+      "tau": 15,
+      "valid_epochs": 27886,
+      "valid_frac": 1.0,
+      "cmi": 0.086285,
+      "mi": 0.043184,
+      "fratio": 0.077349
+    },
+    "d8_tau20": {
+      "d": 8,
+      "tau": 20,
+      "valid_epochs": 27886,
+      "valid_frac": 1.0,
+      "cmi": 0.080499,
+      "mi": 0.041789,
+      "fratio": 0.074073
+    },
+    "d8_tau25": {
+      "d": 8,
+      "tau": 25,
+      "valid_epochs": 27886,
+      "valid_frac": 1.0,
+      "cmi": 0.076827,
+      "mi": 0.041355,
+      "fratio": 0.072336
+    },
+    "d8_tau30": {
+      "d": 8,
+      "tau": 30,
+      "valid_epochs": 27886,
+      "valid_frac": 1.0,
+      "cmi": 0.073465,
+      "mi": 0.040595,
+      "fratio": 0.070653
+    },
+    "d8_tau40": {
+      "d": 8,
+      "tau": 40,
+      "valid_epochs": 27886,
+      "valid_frac": 1.0,
+      "cmi": 0.07013,
+      "mi": 0.039649,
+      "fratio": 0.068115
+    },
+    "d8_tau50": {
+      "d": 8,
+      "tau": 50,
+      "valid_epochs": 27886,
+      "valid_frac": 1.0,
+      "cmi": 0.068799,
+      "mi": 0.039741,
+      "fratio": 0.067996
+    }
+  }
+}
