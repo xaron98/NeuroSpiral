@@ -1,138 +1,142 @@
 # NeuroSpiral
 
-Clifford torus embedding of EEG for sleep stage classification.
+**Clifford torus embedding for multi-periodic signal analysis**
 
-## Overview
+NeuroSpiral applies Takens delay embedding and Clifford torus geometry to extract interpretable features from periodic and quasi-periodic signals. Originally developed for sleep polysomnography, the framework generalizes across multiple domains.
 
-NeuroSpiral extracts geometric features from sleep EEG by projecting Takens time-delay embeddings onto the Clifford torus (S¹ × S¹ ⊂ S³ ⊂ ℝ⁴) and computing winding numbers, inter-hemispheric phase coherence, and tesseract vertex discretisation. Cross-dataset validation on 168 subjects from two independent polysomnography datasets (Sleep-EDF and HMC) demonstrates that continuous torus features capture 75–102% additional information beyond spectral delta power (p < 0.001, permutation test).
+## Key Findings
 
-## Key Results
+### Sleep Geometry
+- The winding number omega1 orders sleep phases as a continuous gradient: N3 < N2 < REM < N1 < W
+- Replicates across 4 independent datasets (HMC n=142, CAP n=34, Sleep-EDF, DREAMT)
+- Geometric position parameter **beta = 0.57 [0.52, 0.62]** quantifies REM's location on the Wake-to-N3 axis
+- EMG torus features discriminate REM behavior disorder with Cohen's d = 1.4-1.7 (FDR p < 0.001)
+- Classification: kappa = 0.648 (5-class), matching a 3-layer MLP (kappa = 0.606 vs 0.593) with full interpretability
+- Persistent homology confirms the torus is a computational tool, not data topology (beta_1 != 2, p = 0.667)
 
-| Metric | Sleep-EDF (n=18) | HMC (n=150) |
-|--------|:----------------:|:-----------:|
-| CMI(ω₁ \| delta) | 0.1637 (p<0.001) | 0.2535 (p<0.001) |
-| Δ F1 (geometric adds) | +0.009 | +0.046 |
-| Cohen's κ | 0.807 ± 0.050 | 0.679 ± 0.087 |
-| Best geometric feature MI | — | 0.4269 (phase_diff_std) |
+### Cross-Domain Validation
+Torus features outperform PCA across all tested domains (mean ratio 2.1x):
+
+| Domain | kappa (torus) | kappa (PCA) | Ratio |
+|--------|-----------|---------|-------|
+| Solar Activity | 0.701 | 0.315 | 2.2x |
+| Sleep (PSG) | 0.607 | 0.264 | 2.3x |
+| Climate | 0.537 | 0.209 | 2.6x |
+| Traffic | 0.532 | 0.454 | 1.2x |
+| Finance | 0.359 | 0.151 | 2.4x |
+
+## Method
+
+```
+Signal (1D) -> Takens embedding (4D) -> Clifford torus (theta, phi) -> 8 geometric features
+```
+
+### The 8 torus features per channel
+1. **omega1** -- winding number (trajectory speed)
+2. **kappa_torus** -- curvature (trajectory shape)
+3. **alpha_mean** -- angular acceleration (dynamics)
+4. **d_geo** -- geodesic distance (path length)
+5. **H_angular** -- angular entropy (occupancy uniformity)
+6. **sigma_dphi** -- phase difference std (phase relationship)
+7. **R** -- phase coherence (synchronization)
+8. **lambda_trans** -- transition rate (regime changes)
+
+### Architecture
+- **Form A** (recommended): Independent torus per signal channel
+- Embedding dimension: d = 4 (validated via false nearest neighbors, FNN = 1.8%)
+- Multi-scale tau: 3 values per channel for temporal range coverage
 
 ## Installation
 
 ```bash
-git clone https://github.com/xaron98/neurospiral.git
-cd neurospiral
-python -m venv .venv
-source .venv/bin/activate
+git clone https://github.com/xaron98/NeuroSpiral.git
+cd NeuroSpiral
 pip install -r requirements.txt
 ```
 
-## Requirements
+## Quick Start
 
-- Python 3.10+
-- MNE-Python ≥ 1.5
-- NumPy, SciPy, scikit-learn, pandas
-- matplotlib (for figures)
+### Python API
 
-## Reproducing Results
+```python
+from neurospiral import TorusEmbedding
 
-### 1. Download datasets
+# Single channel, single tau
+torus = TorusEmbedding(d=4, tau=25)
+features = torus.extract_features(signal_epoch)  # -> (8,)
 
-Both datasets are freely available from PhysioNet (credentialed access):
+# Multi-scale
+torus_ms = TorusEmbedding(d=4, taus=[10, 25, 40])
+features_ms = torus_ms.extract_features(signal_epoch)  # -> (24,)
 
-- [Sleep-EDF Expanded](https://physionet.org/content/sleep-edfx/)
-- [HMC Sleep Staging](https://physionet.org/content/hmc-sleep-staging/)
-
-```bash
-# Sleep-EDF (18 subjects)
-bash scripts/download_sleep_edf.sh
-
-# HMC (154 subjects)
-bash scripts/download_hmc.sh
+# Multi-channel (Form A)
+features_mc = torus_ms.extract_features_multichannel({
+    "EEG": eeg_signal,
+    "ECG": ecg_signal,
+    "EOG": eog_signal,
+    "EMG": emg_signal,
+})  # -> (96,)
 ```
 
-### 2. Run Sleep-EDF validation
+### Universal Torus (any domain)
 
 ```bash
-python scripts/publish_validate.py --n-subjects 85 --output-dir data/results/publication
-```
-
-### 3. Run HMC cross-dataset validation
-
-```bash
-python scripts/run_hmc_validation.py --data-dir data/hmc --n-subjects 152
-```
-
-### 4. Run permutation tests for enhanced features
-
-```bash
-python scripts/phase1_permtest.py
-```
-
-### 5. Generate publication figures
-
-```bash
-python scripts/phase1_figures.py
+python scripts/torus_universal.py data.csv --label-col class --epoch-size 1000
 ```
 
 ## Project Structure
 
 ```
-neurospiral/
-├── src/
-│   ├── features/
-│   │   ├── spectral.py          # Band powers, Hjorth parameters
-│   │   ├── takens.py            # Takens time-delay embedding
-│   │   └── enhanced.py          # Multi-channel phase features
-│   ├── geometry/
-│   │   ├── tesseract.py         # 16 vertices, Q(x)=sgn(x), 24-cell
-│   │   ├── wasserstein.py       # Bures-Wasserstein distance
-│   │   └── alignment.py         # Procrustes alignment, fixed τ
-│   ├── models/
-│   │   └── tcn_torus.py         # TCN with torus regularisation
-│   └── preprocessing/
-│       └── pipeline.py          # Bandpass, ICA, quality check
+NeuroSpiral/
+├── neurospiral/           # Core Python package
+│   ├── embedding.py       # Takens delay embedding
+│   ├── torus.py           # Clifford torus projection + 8 features
+│   ├── decomposition.py   # Beta, gamma/d, class decomposition
+│   ├── classifier.py      # RF classification pipeline
+│   └── utils.py           # Spectral features, FDR correction
 ├── scripts/
-│   ├── publish_validate.py      # Main validation (Sleep-EDF)
-│   ├── run_hmc_validation.py    # Cross-dataset validation (HMC)
-│   ├── phase1_permtest.py       # Permutation tests
-│   ├── phase1_figures.py        # Publication figures
-│   └── download_*.sh            # Dataset download scripts
-├── paper/
-│   ├── paper_draft_v2.md        # Manuscript
-│   └── tables_corrected.md      # Tables
-└── data/
-    └── results/
-        └── figures/             # Generated figures (PDF + PNG)
+│   ├── sleep/             # Sleep staging analyses
+│   ├── cross_domain/      # Climate, finance, ECG, solar
+│   └── torus_universal.py # Apply to any CSV
+├── docs/
+│   ├── METHODS.md         # Mathematical framework
+│   ├── DATASETS.md        # Data sources
+│   └── REPRODUCIBILITY.md # Step-by-step replication
+├── tests/                 # Unit tests
+├── results/               # Analysis outputs (not tracked)
+└── src/                   # Legacy source (deprecated)
 ```
 
-## Mathematical Framework
+## Datasets
 
-The framework applies four transformations to each 30-second EEG epoch:
+All datasets are publicly available. Download from:
+- **Sleep:** [HMC](https://physionet.org/content/hmc-sleep-staging/), [CAP Sleep](https://physionet.org/content/capslpdb/), [Sleep-EDF](https://physionet.org/content/sleep-edfx/), [DREAMT](https://physionet.org/content/dreamt/)
+- **ECG:** [PTB-XL](https://physionet.org/content/ptb-xl/)
 
-1. **Takens embedding** (d=4, τ=25 at 100 Hz): maps scalar EEG to ℝ⁴
-2. **Clifford torus projection**: the embedded trajectory lies on T² = S¹ × S¹ ⊂ S³ (Gakhar & Perea, 2024)
-3. **Winding number extraction**: ω₁, ω₂ measure rotation rates in two orthogonal planes
-4. **Tesseract discretisation**: Q(x) = sgn(x) maps to 16 vertices of {±1}⁴
+See [docs/DATASETS.md](docs/DATASETS.md) for complete details.
 
-Theoretical justification: Gakhar and Perea (2024) proved that sliding-window embeddings of quasiperiodic functions are dense in N-tori, where N equals the number of linearly independent frequencies. Sleep EEG satisfies this condition.
+## Reproducibility
+
+All results can be reproduced with the scripts in `scripts/`. See [docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md) for step-by-step instructions.
 
 ## Citation
 
-If you use this code in your research, please cite:
-
 ```bibtex
-@article{perea2026clifford,
-  title={Clifford Torus Embedding of {EEG} Reveals Non-Redundant Geometric 
-         Features for Sleep Stage Classification: Cross-Dataset Validation},
-  author={Perea, Carlos},
+@article{perea2026neurospiral,
+  title={Toroidal embedding of multimodal polysomnography reveals a
+         reproducible geometric gradient of sleep states},
+  author={Perea Gallego, Carlos Javier},
   year={2026},
-  journal={Submitted}
+  url={https://github.com/xaron98/NeuroSpiral}
 }
 ```
+
+## Author
+
+**Carlos Javier Perea Gallego**
+Independent Researcher, Mataro, Barcelona, Spain
+GitHub: [@xaron98](https://github.com/xaron98)
 
 ## License
 
 MIT License. See [LICENSE](LICENSE) for details.
-
-## Contact
-
-Carlos Perea — xaron98@gmail.com

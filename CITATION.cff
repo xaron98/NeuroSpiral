@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use NeuroSpiral, please cite as below."
+title: "NeuroSpiral: Clifford torus embedding for multi-periodic signal analysis"
+authors:
+  - family-names: "Perea Gallego"
+    given-names: "Carlos Javier"
+    orcid: ""
+    affiliation: "Independent Researcher, Mataró, Barcelona, Spain"
+version: "0.2.0"
+date-released: "2026-04-03"
+url: "https://github.com/xaron98/NeuroSpiral"
+license: MIT
+keywords:
+  - sleep staging
+  - Clifford torus
+  - Takens embedding
+  - geometric features
+  - polysomnography
+  - winding number
+  - time series analysis
